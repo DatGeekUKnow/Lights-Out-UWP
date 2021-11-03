@@ -35,8 +35,8 @@ namespace LightsOutUWP
                     MinGridSize + " and " + MaxGridSize + ".");
                 }
             }
-            }
- public LightsOutGame()
+        }
+        public LightsOutGame()
         {
             rand = new Random(); // Initialize random number generator
             GridSize = MinGridSize;

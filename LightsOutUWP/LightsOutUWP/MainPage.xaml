@@ -5,11 +5,11 @@
     xmlns:local="using:LightsOutUWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Height="300" Width="300">
+    mc:Ignorable="d" Height="446" Width="356">
 
-    <RelativePanel>
-        <Canvas Name="boardCanvas" Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <RelativePanel Background="{ThemeResource AppBarBackgroundThemeBrush}">
+        <Canvas Name="boardCanvas" Height="200" Width="200" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="0,0,0,100"/>
+        <Button Name="newGameButton" RelativePanel.Below="boardCanvas" RelativePanel.AlignLeftWith="boardCanvas" Content="New Game" FontSize="15" Margin="0,-150,0,0" Click="newGameButton_Click" HorizontalAlignment="Center"/>
+        <Button Name="aboutButton" RelativePanel.AlignVerticalCenterWith="newGameButton" RelativePanel.AlignRightWith="boardCanvas" Content="About" FontSize="15" Margin="0,-150,0,0" Click="aboutButton_Click" HorizontalAlignment="Center"/>
     </RelativePanel>
 </Page>
