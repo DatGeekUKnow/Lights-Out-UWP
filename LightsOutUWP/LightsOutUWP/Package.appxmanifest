@@ -32,7 +32,7 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="LightsOutUWP.App">
       <uap:VisualElements
-        DisplayName="LightsOutUWP"
+        DisplayName="Lights Out!"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="LightsOutUWP"
