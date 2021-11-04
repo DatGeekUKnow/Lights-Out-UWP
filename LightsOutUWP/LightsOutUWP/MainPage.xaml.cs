@@ -30,6 +30,7 @@ namespace LightsOutUWP
         public MainPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
 
             game = new LightsOutGame();
 
@@ -132,8 +133,8 @@ namespace LightsOutUWP
 
         private void aboutButton_Click(object sender, RoutedEventArgs e)
         {
-            AboutPage about = new AboutPage();
-            
+            //AboutPage about = new AboutPage();
+            this.Frame.Navigate(typeof(AboutPage));
         }
     }
 }

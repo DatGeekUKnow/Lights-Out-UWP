@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Core;
 
 namespace LightsOutUWP
 {
@@ -48,6 +49,13 @@ namespace LightsOutUWP
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
 
+                // ADD: Register Navigated event handler
+                rootFrame.Navigated += OnNavigated;
+         
+                // ADD: Register BackRequested event handler
+                SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+                
+
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
@@ -72,6 +80,28 @@ namespace LightsOutUWP
                 Window.Current.Activate();
             }
         }
+
+        // ADD: Navigated event handler
+        private void OnNavigated(object sender, NavigationEventArgs e)
+        {
+            // Determine if Back button should be visible
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                ((Frame)sender).CanGoBack ?
+                AppViewBackButtonVisibility.Visible :
+                AppViewBackButtonVisibility.Collapsed;
+        }
+
+        // ADD: BackRequested event handler
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame.CanGoBack)
+            {
+                e.Handled = true;
+                rootFrame.GoBack();
+            }
+        }
+
 
         /// <summary>
         /// Invoked when Navigation to a certain page fails

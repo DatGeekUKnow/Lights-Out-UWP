@@ -6,9 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" d:DesignWidth="450" d:DesignHeight="500">
 
     <Grid>
-
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Image Source="/Assets/SplashScreen.scale-200.png" Height="400"></Image>
+            <TextBlock Height="33" FontSize="22" HorizontalAlignment="Center">Programmers:</TextBlock>
+            <TextBlock HorizontalAlignment="Center">Casey Whitener</TextBlock>
+            <TextBlock HorizontalAlignment="Center">Gavin McCulley</TextBlock>
+        </StackPanel>
     </Grid>
 </Page>
