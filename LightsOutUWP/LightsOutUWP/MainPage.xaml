@@ -10,7 +10,7 @@
     <RelativePanel Background="{ThemeResource AppBarBackgroundThemeBrush}">
         <Image Stretch="Fill" Source="/Assets/ScoobyDooLights.jpg"></Image>
         <Canvas Name="boardCanvas" Height="200" Width="200" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-        <Button Name="newGameButton" RelativePanel.Below="boardCanvas" RelativePanel.AlignLeftWith="boardCanvas" Content="New Game" FontSize="15" Click="newGameButton_Click" HorizontalAlignment="Center"/>
-        <Button Name="aboutButton" RelativePanel.AlignVerticalCenterWith="newGameButton" RelativePanel.AlignRightWith="boardCanvas" Content="About" FontSize="15" Click="aboutButton_Click" HorizontalAlignment="Center"/>
+        <Button Name="newGameButton" RelativePanel.Below="boardCanvas" RelativePanel.AlignLeftWith="boardCanvas" Content="New Game" FontSize="15" Click="newGameButton_Click" HorizontalAlignment="Center" FontWeight="Normal" Background="#66000000"/>
+        <Button Name="aboutButton" RelativePanel.AlignVerticalCenterWith="newGameButton" RelativePanel.AlignRightWith="boardCanvas" Content="About" FontSize="15" Click="aboutButton_Click" HorizontalAlignment="Center" Background="#66000000"/>
     </RelativePanel>
 </Page>
