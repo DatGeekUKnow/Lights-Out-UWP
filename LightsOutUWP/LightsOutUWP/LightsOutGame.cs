@@ -36,6 +36,49 @@ namespace LightsOutUWP
                 }
             }
         }
+
+        // Place this property AFTER the GridSize property
+        public string Grid
+        {
+            get
+            {
+                // Write this method to convert the 2D grid array into "TFTTFFTTT"
+                return ToString();
+            }
+            set
+            {
+                // Write this method to set the 2D grid array to values from "TFTTFFTTT"
+                StringToGrid(value);
+            }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder gamestr = new StringBuilder();
+            for (int i = 0; i < gridSize; i++)
+            {
+                for (int j = 0; j < gridSize; j++)
+                {
+                    if (grid[i, j])
+                        gamestr.Append("T");
+                    else
+                        gamestr.Append("F");
+                }
+            }
+            return gamestr.ToString();
+        }
+
+        private void StringToGrid(string value)
+        {
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (value[i] == 'T')
+                    grid[i / gridSize, i % gridSize] = true;
+                else
+                    grid[i / gridSize, i % gridSize] = false;
+            }
+        }
+
         public LightsOutGame()
         {
             rand = new Random(); // Initialize random number generator
@@ -84,7 +127,7 @@ namespace LightsOutUWP
                 {
                     if (grid[r, c])
                     {
-                    return false;
+                        return false;
                     }
                 }
             }

@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Core;
+using Windows.Storage;
 
 namespace LightsOutUWP
 {
@@ -124,6 +125,10 @@ namespace LightsOutUWP
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+
+            Frame frame = Window.Current.Content as Frame;
+            ApplicationData.Current.LocalSettings.Values["NavigationState"] = frame.GetNavigationState();
+
             deferral.Complete();
         }
     }

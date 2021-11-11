@@ -12,5 +12,6 @@
         <Canvas Name="boardCanvas" Height="200" Width="200" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
         <Button Name="newGameButton" RelativePanel.Below="boardCanvas" RelativePanel.AlignLeftWith="boardCanvas" Content="New Game" FontSize="15" Click="newGameButton_Click" HorizontalAlignment="Center" FontWeight="Normal" Background="#66000000"/>
         <Button Name="aboutButton" RelativePanel.AlignVerticalCenterWith="newGameButton" RelativePanel.AlignRightWith="boardCanvas" Content="About" FontSize="15" Click="aboutButton_Click" HorizontalAlignment="Center" Background="#66000000"/>
+        <Button Name="settingsButton" RelativePanel.AlignHorizontalCenterWith="boardCanvas" RelativePanel.Below="newGameButton" Content="Settings" FontSize="15" Click="settingsButton_Click" HorizontalAlignment="Center" Background="#66000000" Margin="0,15,0,0"/>
     </RelativePanel>
 </Page>

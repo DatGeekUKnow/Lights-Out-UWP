@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="LightsOutUWP.BlankPage1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LightsOutUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource AppBarBackgroundThemeBrush}" d:DesignHeight="500" Width="681">
+    <Grid>
+        <Image Source="/Assets/SplashScreen.scale-200.png" FocusVisualPrimaryBrush="#68000000" Opacity="0.5" Stretch="Fill"></Image>
+        <TextBlock FontSize="45" Margin="84,0,0,100" HorizontalAlignment="Left">Settings</TextBlock>
+        <TextBlock FontSize="25" HorizontalAlignment="Left" Margin="299,54,0,-54">Choose your grid color!</TextBlock>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,0">
+            <TextBlock Margin="0,0,0,25" FontSize="25" HorizontalAlignment="Center">Choose your grid size!</TextBlock>
+            <RadioButton Name="size3" Margin="0,0,0,25" Content="3x3" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="size3_Checked" FontSize="25"/>
+            <RadioButton Name="size4" Margin="0,0,0,25" Content="4x4" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="size4_Checked" FontSize="25"/>
+            <RadioButton Name="size5" Margin="0,0,0,25" Content="5x5" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="size5_Checked" FontSize="25"/>
+        </StackPanel>
+        <ColorPicker Name="gridColorPicker" IsColorChannelTextInputVisible="False" IsHexInputVisible="False" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="301,0,0,0" RenderTransformOrigin="0.115,0.491"/>
+    </Grid>
+</Page>

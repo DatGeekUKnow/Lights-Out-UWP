@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -15,6 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
+using Windows.UI.Xaml.Markup;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -26,16 +29,54 @@ namespace LightsOutUWP
     public sealed partial class MainPage : Page
     {
         private LightsOutGame game;
+        private Color gridColor = Colors.White;
 
         public MainPage()
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
-
             game = new LightsOutGame();
-
             CreateGrid();
             DrawGrid();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            string json = JsonConvert.SerializeObject(game);
+            ApplicationData.Current.LocalSettings.Values["game"] = json;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // TODO: LOAD COLOR
+            if (ApplicationData.Current.LocalSettings.Values.ContainsKey("gridColor"))
+            {
+                string json = ApplicationData.Current.LocalSettings.Values["gridColor"] as string;
+
+                gridColor = (Color)XamlBindingHelper.ConvertValue(typeof(Color), json);
+            }
+            else
+            {
+                gridColor = Colors.White;
+            }
+            if (ApplicationData.Current.LocalSettings.Values.ContainsKey("game"))
+            {
+                string json = ApplicationData.Current.LocalSettings.Values["game"] as string;
+                game = JsonConvert.DeserializeObject<LightsOutGame>(json);
+                CreateGrid();
+                DrawGrid();
+            }
+            if (ApplicationData.Current.LocalSettings.Values.ContainsKey("gridSize"))
+            {
+                string json = ApplicationData.Current.LocalSettings.Values["gridSize"] as string;
+                if (int.Parse(json) != game.GridSize)
+                {
+                    game.GridSize = int.Parse(json);
+                    CreateGrid();
+                    DrawGrid();
+                    game.NewGame();
+                }
+            }
         }
 
         private void CreateGrid()
@@ -81,7 +122,6 @@ namespace LightsOutUWP
             var move = (Point)rect.Tag;
             game.FlipLight((int)move.X, (int)move.Y);
             // TODO: Redraw the board
-            DrawGrid();
 
             // TODO: Show MessageBox if the game is over
             if (game.IsGameOver())
@@ -90,9 +130,9 @@ namespace LightsOutUWP
                 dialog.Commands.Add(new UICommand("OK"));
 
                 await dialog.ShowAsync();
-                game = new LightsOutGame();
-                DrawGrid();
+                game = new LightsOutGame {GridSize = game.GridSize };
             }
+            DrawGrid();
 
             // Event was handled
             e.Handled = true;
@@ -101,7 +141,6 @@ namespace LightsOutUWP
         private void DrawGrid()
         {
             int index = 0;
-
             // Set the colors of the rectangles
             for (int r = 0; r < game.GridSize; r++)
             {
@@ -112,14 +151,14 @@ namespace LightsOutUWP
                     if (game.IsOn(r, c))
                     {
                         // On
-                        rect.Fill = new SolidColorBrush(Colors.White);
+                        rect.Fill = new SolidColorBrush(gridColor);
                         rect.Stroke = new SolidColorBrush(Colors.Black);
                     }
                     else
                     {
                         // Off
                         rect.Fill = new SolidColorBrush(Colors.Black);
-                        rect.Stroke = new SolidColorBrush(Colors.White);
+                        rect.Stroke = new SolidColorBrush(gridColor);
                     }
                 }
             }
@@ -135,6 +174,11 @@ namespace LightsOutUWP
         {
             //AboutPage about = new AboutPage();
             this.Frame.Navigate(typeof(AboutPage));
+        }
+
+        private void settingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(BlankPage1), game.GridSize.ToString());
         }
     }
 }
